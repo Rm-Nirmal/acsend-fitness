@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - ASCEND | Visual Tour of Our Facility</title>
+    <meta name="description"
+        content="Take a virtual tour of ASCEND's world-class fitness facility in Matale. Explore our premium equipment, ambiance, and spaces.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { brand: { black: '#0a0a0a', dark: '#121212', gray: '#2a2a2a', silver: '#a0a0a0', white: '#ffffff' } },
+                    fontFamily: { sans: ['Montserrat', 'sans-serif'], header: ['Oswald', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal-scale.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.05)
+            }
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff, #a0a0a0, #ffffff, #666666);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-shift 6s ease infinite;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallery-card {
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(160, 160, 160, 0.08);
+            z-index: 10;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body class="bg-brand-black text-white font-sans overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 py-4" id="navbar">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-header font-bold tracking-widest text-white">ASCEND<span
+                    class="text-brand-silver">.</span></a>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html"
+                    class="text-sm font-medium hover:text-brand-silver transition-colors tracking-widest">HOME</a>
+                <a href="about.html"
+                    class="text-sm font-medium hover:text-brand-silver transition-colors tracking-widest">ABOUT</a>
+                <a href="gallery.html" class="text-brand-silver text-sm font-medium tracking-widest">GALLERY</a>
+                <a href="services.html"
+                    class="text-sm font-medium hover:text-brand-silver transition-colors tracking-widest">SERVICES</a>
+                <a href="contact.html"
+                    class="text-sm font-medium hover:text-brand-silver transition-colors tracking-widest">CONTACT</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" class="text-white focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu"
+            class="fixed inset-0 bg-brand-black z-40 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col items-center justify-center space-y-8">
+            <button id="close-menu-btn" class="absolute top-6 right-6 text-white text-4xl">&times;</button>
+            <a href="index.html" class="text-2xl font-header tracking-widest hover:text-brand-silver">HOME</a>
+            <a href="about.html" class="text-2xl font-header tracking-widest hover:text-brand-silver">ABOUT</a>
+            <a href="gallery.html" class="text-2xl font-header tracking-widest hover:text-brand-silver">GALLERY</a>
+            <a href="services.html" class="text-2xl font-header tracking-widest hover:text-brand-silver">SERVICES</a>
+            <a href="contact.html" class="text-2xl font-header tracking-widest hover:text-brand-silver">CONTACT</a>
+        </div>
+    </nav>
+
+    <!-- Cinematic Hero -->
+    <div class="relative h-[70vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="assetz/IMG_2500.JPG" class="w-full h-full object-cover scale-110"
+                style="animation: pulse-glow 20s ease-in-out infinite;">
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-black/60 via-black/80 to-brand-black"></div>
+        </div>
+        <div class="absolute top-20 right-10 w-72 h-72 bg-brand-silver/5 rounded-full blur-[100px] pulse-glow"></div>
+        <div class="absolute bottom-10 left-20 w-96 h-96 bg-white/5 rounded-full blur-[120px] pulse-glow"
+            style="animation-delay:2s"></div>
+        <div class="relative z-10 text-center px-4">
+            <span
+                class="inline-block text-brand-silver tracking-[0.3em] text-xs md:text-sm font-bold uppercase mb-6 reveal">Visual
+                Tour</span>
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-header font-bold mb-6 tracking-tighter gradient-text reveal"
+                style="transition-delay:150ms">THE SPACE</h1>
+            <div class="w-32 h-[2px] mx-auto bg-gradient-to-r from-transparent via-brand-silver to-transparent reveal"
+                style="transition-delay:300ms"></div>
+            <p class="text-gray-400 mt-6 max-w-md mx-auto text-sm md:text-base leading-relaxed reveal"
+                style="transition-delay:450ms">Step inside Matale's most premium fitness environment.</p>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg class="w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Gallery Grid -->
+    <section class="py-24 bg-brand-black relative">
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-silver/[0.02] rounded-full blur-[150px]">
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+
+                <!-- Assetz Images - Primary Gallery -->
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2484.JPG" alt="Gym Equipment"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">FACILITY</span></div>
+                            <h3 class="text-xl font-header font-bold">MAIN FLOOR</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2485.JPG" alt="Training Zone"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">TRAINING</span></div>
+                            <h3 class="text-xl font-header font-bold">TRAINING ZONE</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2486.JPG" alt="Workout Area"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">EQUIPMENT</span></div>
+                            <h3 class="text-xl font-header font-bold">WORKOUT AREA</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2487.JPG" alt="Strength Training"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">POWER</span></div>
+                            <h3 class="text-xl font-header font-bold">STRENGTH TRAINING</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2488.JPG" alt="Premium Equipment"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">PREMIUM</span></div>
+                            <h3 class="text-xl font-header font-bold">ELITE EQUIPMENT</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2490.JPG" alt="Personal Training"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">COACHING</span></div>
+                            <h3 class="text-xl font-header font-bold">PERSONAL TRAINING</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2491.JPG" alt="Gym Ambiance"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">AMBIANCE</span></div>
+                            <h3 class="text-xl font-header font-bold">GYM VIBES</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2492.JPG" alt="Fitness Zone"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">FITNESS</span></div>
+                            <h3 class="text-xl font-header font-bold">FITNESS ZONE</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2493.JPG" alt="Workout Sessions"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">SESSIONS</span></div>
+                            <h3 class="text-xl font-header font-bold">WORKOUT SESSIONS</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2494.JPG" alt="Gym Floor"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">FACILITY</span></div>
+                            <h3 class="text-xl font-header font-bold">GYM FLOOR</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2495.JPG" alt="Group Training"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">GROUP</span></div>
+                            <h3 class="text-xl font-header font-bold">GROUP TRAINING</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2496.JPG" alt="Gym Interior"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">INTERIOR</span></div>
+                            <h3 class="text-xl font-header font-bold">GYM INTERIOR</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2497.JPG" alt="Weight Room"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">WEIGHTS</span></div>
+                            <h3 class="text-xl font-header font-bold">WEIGHT ROOM</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2498.JPG" alt="Training Setup"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">SETUP</span></div>
+                            <h3 class="text-xl font-header font-bold">TRAINING SETUP</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2499.JPG" alt="Lifting Area"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">LIFTING</span></div>
+                            <h3 class="text-xl font-header font-bold">LIFTING AREA</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2500.JPG" alt="Gym Panorama"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">PANORAMA</span></div>
+                            <h3 class="text-xl font-header font-bold">FULL VIEW</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2501.JPG" alt="Machine Area"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">MACHINES</span></div>
+                            <h3 class="text-xl font-header font-bold">MACHINE AREA</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2502.JPG" alt="Recovery Zone"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">RECOVERY</span></div>
+                            <h3 class="text-xl font-header font-bold">RECOVERY ZONE</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2503.JPG" alt="Cardio Section"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">CARDIO</span></div>
+                            <h3 class="text-xl font-header font-bold">CARDIO SECTION</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2504.JPG" alt="Functional Training"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">FUNCTIONAL</span></div>
+                            <h3 class="text-xl font-header font-bold">FUNCTIONAL TRAINING</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2506.JPG" alt="Power Rack"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">POWER</span></div>
+                            <h3 class="text-xl font-header font-bold">POWER RACK</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2507.JPG" alt="Free Weights Area"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">FREE WEIGHTS</span></div>
+                            <h3 class="text-xl font-header font-bold">FREE WEIGHTS</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2508.JPG" alt="Gym Lighting"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">LED LIGHTS</span></div>
+                            <h3 class="text-xl font-header font-bold">NEON AMBIANCE</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2512.JPG" alt="Gym Atmosphere"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">ATMOSPHERE</span></div>
+                            <h3 class="text-xl font-header font-bold">GYM ATMOSPHERE</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2513.JPG" alt="Premium Space"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">PREMIUM</span></div>
+                            <h3 class="text-xl font-header font-bold">PREMIUM SPACE</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2294.JPG" alt="Training Area"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">TRAINING</span></div>
+                            <h3 class="text-xl font-header font-bold">TRAINING AREA</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2323.JPG" alt="Workout Space"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">WORKOUT</span></div>
+                            <h3 class="text-xl font-header font-bold">WORKOUT SPACE</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2408.JPG" alt="Gym Lifestyle"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">LIFESTYLE</span></div>
+                            <h3 class="text-xl font-header font-bold">GYM LIFESTYLE</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
+                    onclick="openLightbox(this)">
+                    <img src="assetz/IMG_2911.JPG" alt="Athletes"
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                            <div class="glass-strong rounded-full px-3 py-1 inline-block mb-2"><span
+                                    class="text-[10px] text-brand-silver tracking-widest">ATHLETES</span></div>
+                            <h3 class="text-xl font-header font-bold">OUR ATHLETES</h3>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-brand-dark relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-silver/5 rounded-full blur-[120px]">
+            </div>
+        </div>
+        <div class="container mx-auto px-6 text-center relative z-10 reveal">
+            <h2 class="text-3xl md:text-5xl font-header font-bold mb-4">SEE IT FOR <span
+                    class="gradient-text">YOURSELF</span></h2>
+            <p class="text-gray-400 max-w-lg mx-auto mb-8">Photos don't do it justice. Book a private tour and
+                experience the Ascend atmosphere first-hand.</p>
+            <a href="contact.html"
+                class="inline-block px-10 py-4 bg-gradient-to-r from-brand-silver to-gray-400 text-brand-black font-header font-bold tracking-[0.15em] rounded-lg uppercase hover:shadow-[0_10px_40px_rgba(160,160,160,0.3)] hover:-translate-y-1 transition-all duration-300">Book
+                a Tour</a>
+        </div>
+    </section>
+
+    <!-- Lightbox Overlay -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-white text-4xl hover:text-brand-silver transition-colors z-10"
+            onclick="closeLightbox()">&times;</button>
+        <img id="lightbox-img" src="" alt="Gallery Preview">
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black pt-20 pb-10 border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between mb-12">
+                <div class="mb-8 md:mb-0">
+                    <a href="index.html"
+                        class="text-3xl font-header font-bold tracking-widest text-white block mb-6">ASCEND<span
+                            class="text-brand-silver">.</span></a>
+                    <p class="text-gray-500 text-sm mb-2">123 Luxury Lane, Matale, Sri Lanka</p>
+                    <p class="text-gray-500 text-sm mb-2">+94 77 123 4567</p>
+                    <p class="text-gray-500 text-sm">contact@ascendmatale.com</p>
+                </div>
+                <div class="flex space-x-12">
+                    <div>
+                        <h5 class="text-white font-bold mb-4 tracking-wider text-sm">MENU</h5>
+                        <ul class="space-y-2">
+                            <li><a href="index.html"
+                                    class="text-gray-500 hover:text-white transition-colors text-sm">Home</a></li>
+                            <li><a href="about.html"
+                                    class="text-gray-500 hover:text-white transition-colors text-sm">About</a></li>
+                            <li><a href="services.html"
+                                    class="text-gray-500 hover:text-white transition-colors text-sm">Services</a></li>
+                            <li><a href="contact.html"
+                                    class="text-gray-500 hover:text-white transition-colors text-sm">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-white font-bold mb-4 tracking-wider text-sm">SOCIAL</h5>
+                        <ul class="space-y-2">
+                            <li><a href="#"
+                                    class="text-gray-500 hover:text-white transition-colors text-sm">Instagram</a></li>
+                            <li><a href="#"
+                                    class="text-gray-500 hover:text-white transition-colors text-sm">Facebook</a></li>
+                            <li><a href="#" class="text-gray-500 hover:text-white transition-colors text-sm">Twitter</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 text-center text-gray-600 text-xs tracking-wider">&copy; 2024
+                ASCEND. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Extended reveal observers
+        document.addEventListener('DOMContentLoaded', () => {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); } });
+            }, { threshold: 0.1 });
+            ['.reveal-scale'].forEach(cls => document.querySelectorAll(cls).forEach(el => obs.observe(el)));
+        });
+
+        // Lightbox
+        function openLightbox(card) {
+            const img = card.querySelector('img');
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+    </script>
+</body>
+
+</html>

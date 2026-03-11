@@ -4,43 +4,68 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeMenuBtn = document.getElementById('close-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const navbar = document.getElementById('navbar');
+    const menuOverlay = document.getElementById('menu-overlay');
 
-    function toggleMenu() {
-        if (!mobileMenu) return; // Guard clause
-        const isHidden = mobileMenu.classList.contains('translate-x-full');
-        if (isHidden) {
-            mobileMenu.classList.remove('translate-x-full');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
-        } else {
-            mobileMenu.classList.add('translate-x-full');
-            document.body.style.overflow = '';
-        }
+    function openMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.remove('pointer-events-none');
+        mobileMenu.classList.add('pointer-events-auto');
+        // Trigger reflow for smooth animation
+        requestAnimationFrame(() => {
+            if (menuOverlay) menuOverlay.classList.add('active');
+            mobileMenu.classList.add('menu-open');
+            // Animate links staggered
+            const links = mobileMenu.querySelectorAll('.mobile-nav-link');
+            links.forEach((link, i) => {
+                setTimeout(() => {
+                    link.classList.add('active');
+                }, 80 * i);
+            });
+        });
+        document.body.style.overflow = 'hidden';
     }
 
-    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMenu);
-    if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMenu);
+    function closeMenu() {
+        if (!mobileMenu) return;
+        const links = mobileMenu.querySelectorAll('.mobile-nav-link');
+        // Reverse animate links
+        links.forEach((link, i) => {
+            setTimeout(() => {
+                link.classList.remove('active');
+            }, 30 * (links.length - 1 - i));
+        });
+        if (menuOverlay) menuOverlay.classList.remove('active');
+        mobileMenu.classList.remove('menu-open');
+        setTimeout(() => {
+            mobileMenu.classList.remove('pointer-events-auto');
+            mobileMenu.classList.add('pointer-events-none');
+        }, 400);
+        document.body.style.overflow = '';
+    }
+
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMenu);
+    if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMenu);
+    if (menuOverlay) menuOverlay.addEventListener('click', closeMenu);
 
     // Close menu when clicking a link
     if (mobileMenu) {
         mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('translate-x-full');
-                document.body.style.overflow = '';
-            });
+            link.addEventListener('click', closeMenu);
         });
     }
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+    });
 
     // Navbar scroll effect
     window.addEventListener('scroll', () => {
         if (!navbar) return;
         if (window.scrollY > 50) {
-            navbar.classList.add('bg-brand-black/95', 'backdrop-blur-md', 'shadow-lg');
-            navbar.classList.remove('py-4');
-            navbar.classList.add('py-2');
+            navbar.classList.add('navbar-scrolled');
         } else {
-            navbar.classList.remove('bg-brand-black/95', 'backdrop-blur-md', 'shadow-lg');
-            navbar.classList.remove('py-2');
-            navbar.classList.add('py-4');
+            navbar.classList.remove('navbar-scrolled');
         }
     });
 
@@ -48,14 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.1 // Trigger when 10% of the element is visible
+        threshold: 0.1
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Only animate once
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -69,11 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Get standard submit button
             const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.innerText;
 
-            // Simple validation simulation
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
@@ -83,22 +106,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Simulate sending state
             submitBtn.innerText = 'SENDING...';
             submitBtn.disabled = true;
             submitBtn.classList.remove('hover:bg-white');
 
-            // Simulate API call to EmailJS (mock)
             setTimeout(() => {
-                // Success state
                 submitBtn.innerText = 'MESSAGE SENT!';
                 submitBtn.classList.add('bg-green-600', 'text-white', 'border-transparent');
                 submitBtn.classList.remove('bg-brand-silver', 'text-brand-black');
 
-                // Clear form
                 contactForm.reset();
 
-                // Reset button after 3 seconds
                 setTimeout(() => {
                     submitBtn.innerText = originalText;
                     submitBtn.disabled = false;
@@ -107,15 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 3000);
 
             }, 1500);
-
-            // NOTE FOR USER:
-            // To make this actually send emails, you can use EmailJS (emailjs.com).
-            // 1. Sign up for free.
-            // 2. Add the script to your <head>: <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-            // 3. Initialize it: emailjs.init("YOUR_USER_ID");
-            // 4. In this function, replace the setTimeout with:
-            // emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-            //     .then(function() { ...success... }, function(error) { ...error... });
         });
     }
 });

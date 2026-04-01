@@ -512,7 +512,9 @@
                         </svg>
                     </div>
                     <h4 class="font-header font-bold text-lg tracking-widest mb-2">OPEN HOURS</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed">24/7 for Members<br>Staffed: 6:00 AM – 10:00 PM</p>
+                    <p class="text-gray-400 text-sm leading-relaxed"><span class="text-bold">Monday -
+                            Saturday</span> <br>6:00 AM – 10:00 PM <br><br>
+                        Sunday <br> 8.30 AM - 4.30 PM</p>
                 </div>
             </div>
         </div>
@@ -529,10 +531,11 @@
                 <!-- Left: Intro + WhatsApp -->
                 <div class="w-full lg:w-5/12 reveal-left">
                     <span class="text-brand-silver tracking-[0.2em] text-xs font-bold uppercase">Send A Message</span>
-                    <h2 class="text-4xl md:text-6xl font-header font-bold mt-3 mb-6 leading-none">LET'S<br><span
-                            class="gradient-text">CONNECT</span></h2>
+                    <h2 class="text-4xl md:text-6xl font-header font-bold mt-3 mb-6 leading-none gradient-text">
+                        LET'S<br><span>CONNECT</span></h2>
                     <p class="text-gray-400 mb-10 leading-relaxed text-lg">Ready to elevate your fitness journey? Visit
-                        our luxury facility in Matale or send us a message to schedule a private tour of our world-class
+                        our premium facility in Matale or send us a message to schedule a private tour of our
+                        premium-class
                         equipment and amenities.</p>
 
                     <div class="line-accent w-full mb-10"></div>
@@ -595,19 +598,24 @@
                         <div class="absolute -top-20 -right-20 w-40 h-40 bg-brand-silver/10 rounded-full blur-[60px]">
                         </div>
 
-                        <form id="contactForm" class="space-y-8 relative z-10">
+                        <form id="contactForm" class="space-y-8 relative z-10" action="https://api.web3forms.com/submit"
+                            method="POST">
+                            <input type="hidden" name="access_key" value="20e21b3b-4cc6-402e-8ade-cbc34ca715fe">
+                            <input type="hidden" name="subject" value="New Membership Inquiry | ASCEND FITNESS Studios">
+                            <input type="hidden" name="from_name" value="ASCEND FITNESS Studios">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
                                 <div class="group relative">
                                     <input type="text"
                                         class="form-input w-full bg-white/[0.03] border border-white/10 rounded-lg text-white p-4 focus:outline-none placeholder-transparent peer"
-                                        id="name" placeholder="Name" required>
+                                        name="name" id="name" placeholder="Name" required>
                                     <label for="name"
                                         class="absolute left-4 -top-2.5 bg-brand-dark px-2 text-gray-500 text-xs transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-600 peer-placeholder-shown:top-4 peer-placeholder-shown:bg-transparent peer-focus:-top-2.5 peer-focus:text-brand-silver peer-focus:text-xs peer-focus:bg-brand-dark tracking-wider">NAME</label>
                                 </div>
                                 <div class="group relative">
                                     <input type="email"
                                         class="form-input w-full bg-white/[0.03] border border-white/10 rounded-lg text-white p-4 focus:outline-none placeholder-transparent peer"
-                                        id="email" placeholder="Email" required>
+                                        name="email" id="email" placeholder="Email" required>
                                     <label for="email"
                                         class="absolute left-4 -top-2.5 bg-brand-dark px-2 text-gray-500 text-xs transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-600 peer-placeholder-shown:top-4 peer-placeholder-shown:bg-transparent peer-focus:-top-2.5 peer-focus:text-brand-silver peer-focus:text-xs peer-focus:bg-brand-dark tracking-wider">EMAIL</label>
                                 </div>
@@ -615,13 +623,13 @@
                             <div class="group relative">
                                 <input type="tel"
                                     class="form-input w-full bg-white/[0.03] border border-white/10 rounded-lg text-white p-4 focus:outline-none placeholder-transparent peer"
-                                    id="phone" placeholder="Phone">
+                                    name="phone" id="phone" placeholder="Phone">
                                 <label for="phone"
                                     class="absolute left-4 -top-2.5 bg-brand-dark px-2 text-gray-500 text-xs transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-600 peer-placeholder-shown:top-4 peer-placeholder-shown:bg-transparent peer-focus:-top-2.5 peer-focus:text-brand-silver peer-focus:text-xs peer-focus:bg-brand-dark tracking-wider">PHONE
                                     (OPTIONAL)</label>
                             </div>
                             <div class="group relative">
-                                <select id="interest"
+                                <select name="interest" id="interest"
                                     class="form-input w-full bg-white/[0.03] border border-white/10 rounded-lg text-white p-4 focus:outline-none appearance-none cursor-pointer"
                                     required>
                                     <option class="bg-brand-dark" value="" disabled selected>Interested in...</option>
@@ -641,13 +649,13 @@
                             <div class="group relative">
                                 <textarea rows="5"
                                     class="form-input w-full bg-white/[0.03] border border-white/10 rounded-lg text-white p-4 focus:outline-none placeholder-transparent peer resize-none"
-                                    id="message" placeholder="Message" required></textarea>
+                                    name="message" id="message" placeholder="Message" required></textarea>
                                 <label for="message"
                                     class="absolute left-4 -top-2.5 bg-brand-dark px-2 text-gray-500 text-xs transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-600 peer-placeholder-shown:top-4 peer-placeholder-shown:bg-transparent peer-focus:-top-2.5 peer-focus:text-brand-silver peer-focus:text-xs peer-focus:bg-brand-dark tracking-wider">YOUR
                                     MESSAGE</label>
                             </div>
                             <button type="submit" id="submitBtn"
-                                class="submit-btn w-full md:w-auto px-12 py-4 bg-gradient-to-r from-brand-silver to-gray-400 text-brand-black font-header font-bold tracking-[0.15em] rounded-lg uppercase disabled:opacity-50 disabled:cursor-not-allowed">
+                                class="submit-btn w-full md:w-auto px-12 py-4 bg-gradient-to-r from-brand-white to-gray-400 text-brand-black font-header font-bold tracking-[0.15em] rounded-lg uppercase disabled:opacity-50 disabled:cursor-not-allowed">
                                 Send Message
                             </button>
                         </form>
@@ -727,8 +735,8 @@
     <!-- Image Showcase Section -->
     <section class="relative h-[70vh] overflow-hidden reveal">
         <div class="absolute inset-0">
-            <img src="assets/IMG_2911.jfif" alt="Ascend Fitness Athlete"
-                class="w-full h-full object-cover object-center transition-transform duration-[2s] hover:scale-105">
+            <img src="assets/IMG_2513.jfif" alt="Ascend Fitness Athlete"
+                class="w-full h-full object-cover object-[40%_75%] transition-transform duration-[2s] hover:scale-105">
             <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-black/50 to-brand-black/30"></div>
             <div class="absolute inset-0 bg-gradient-to-r from-brand-black/60 via-transparent to-brand-black/60"></div>
         </div>
@@ -781,8 +789,8 @@
             <div class="flex flex-col md:flex-row justify-between mb-12">
                 <div class="mb-8 md:mb-0">
                     <a href="index.html"
-                        class="text-3xl font-header font-bold tracking-widest text-white block mb-6">ASCEND<span
-                            class="text-brand-silver">.</span></a>
+                        class="text-3xl font-header font-bold tracking-widest text-white block mb-6">ASCEND
+                        FITNESS Studios<span class="text-brand-silver">.</span></a>
                     <p class="text-gray-500 text-sm mb-2">Ascend Fitness Studios, King Street, Matale Town</p>
                     <p class="text-gray-500 text-sm mb-2">Rocell Building - Top Floor, Sri Lanka 21000</p>
                     <p class="text-gray-500 text-sm mb-2"><a href="tel:+94767676693"
@@ -822,7 +830,8 @@
                 </div>
             </div>
             <div class="border-t border-white/5 pt-8 text-center text-gray-600 text-xs tracking-wider">
-                &copy; 2024 ASCEND. All rights reserved.
+                &copy; 2026 ASCEND
+                FITNESS Studios. All rights reserved.
             </div>
         </div>
     </footer>

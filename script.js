@@ -88,10 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
     revealElements.forEach(el => observer.observe(el));
 
-    // Contact Form Logic
+
+    // Contact Form Logic (Web3Forms Integrated)
     const contactForm = document.getElementById('contactForm');
+
     if (contactForm) {
-        contactForm.addEventListener('submit', function (e) {
+        contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const submitBtn = document.getElementById('submitBtn');
@@ -110,21 +112,36 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
             submitBtn.classList.remove('hover:bg-white');
 
-            setTimeout(() => {
-                submitBtn.innerText = 'MESSAGE SENT!';
-                submitBtn.classList.add('bg-green-600', 'text-white', 'border-transparent');
-                submitBtn.classList.remove('bg-brand-silver', 'text-brand-black');
+            const formData = new FormData(contactForm);
 
-                contactForm.reset();
+            try {
+                const response = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    body: formData
+                });
 
+                const data = await response.json();
+
+                if (response.ok) {
+                    submitBtn.innerText = 'MESSAGE SENT!';
+                    submitBtn.classList.add('bg-green-600', 'text-white', 'border-transparent');
+                    submitBtn.classList.remove('bg-brand-silver', 'text-brand-black');
+
+                    contactForm.reset();
+                } else {
+                    alert("Error: " + data.message);
+                }
+
+            } catch (error) {
+                alert("Something went wrong. Please try again.");
+            } finally {
                 setTimeout(() => {
                     submitBtn.innerText = originalText;
                     submitBtn.disabled = false;
                     submitBtn.classList.remove('bg-green-600', 'text-white', 'border-transparent');
                     submitBtn.classList.add('bg-brand-silver', 'text-brand-black', 'hover:bg-white');
                 }, 3000);
-
-            }, 1500);
+            }
         });
     }
 });

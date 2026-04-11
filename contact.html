@@ -768,19 +768,39 @@
     </section>
 
     <!-- Map Section -->
-    <div class="w-full h-[500px] bg-gray-800 relative group overflow-hidden">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.5!2d79.8621696!3d7.4186752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae345c09e9dd183%3A0x67f3b38b39ba56bc!2sASCEND%20Fitness%20Studios!5e0!3m2!1sen!2slk"
-            width="100%" height="100%" style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);"
-            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            class="transition-all duration-700 group-hover:filter-none"></iframe>
-        <div class="absolute inset-0 pointer-events-none border-[16px] border-brand-black/50 rounded-none"></div>
-        <!-- Map overlay label -->
-        <a href="https://maps.app.goo.gl/bSzehVNJG1YJFAsR6" target="_blank" rel="noopener noreferrer"
-            class="absolute bottom-8 left-8 glass-strong px-6 py-4 rounded-xl z-10 hover:border-white/30 transition-all duration-300 no-underline">
-            <p class="font-header font-bold tracking-widest text-sm">ASCEND<span class="text-brand-silver">.</span></p>
-            <p class="text-gray-400 text-xs mt-1">King Street, Matale Town</p>
-        </a>
+    <div class="w-full relative group overflow-hidden">
+        <div class="h-[500px] bg-gray-800 relative overflow-hidden">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.5!2d80.6216961!3d7.4686752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae345c09e9dd183%3A0x67f3b38b39ba56bc!2sASCEND%20Fitness%20Studios!5e0!3m2!1sen!2slk!4v1712500000000!5m2!1sen!2slk"
+                width="100%" height="100%" style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                class="transition-all duration-700 group-hover:filter-none group-hover:grayscale-0"></iframe>
+            <div class="absolute inset-0 pointer-events-none border-[16px] border-brand-black/50"></div>
+            <!-- Map overlay label -->
+            <div class="absolute bottom-8 left-8 glass-strong px-6 py-4 rounded-xl z-10">
+                <p class="font-header font-bold tracking-widest text-sm">ASCEND<span class="text-brand-silver">.</span></p>
+                <p class="text-gray-400 text-xs mt-1">King Street, Matale Town</p>
+            </div>
+        </div>
+        <!-- Open in Google Maps Button -->
+        <div class="bg-brand-black py-6 flex justify-center">
+            <a href="https://maps.app.goo.gl/bSzehVNJG1YJFAsR6" target="_blank" rel="noopener noreferrer"
+                class="group inline-flex items-center gap-3 px-8 py-4 glass-strong rounded-xl hover:border-brand-silver/40 transition-all duration-500 hover:shadow-[0_0_30px_rgba(160,160,160,0.1)] hover:-translate-y-1">
+                <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-gradient-to-r group-hover:from-brand-silver group-hover:to-gray-400 transition-all duration-500">
+                    <svg class="w-5 h-5 text-brand-silver group-hover:text-brand-black transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <div class="text-[10px] text-gray-500 tracking-widest uppercase">Get Directions</div>
+                    <div class="text-white font-header font-bold tracking-wider text-sm">OPEN IN GOOGLE MAPS</div>
+                </div>
+                <svg class="w-4 h-4 text-brand-silver ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+            </a>
+        </div>
     </div>
 
     <!-- Footer -->

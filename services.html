@@ -509,121 +509,326 @@
         </div>
     </section>
 
-    <!-- Membership Section -->
-    <section class="py-24 bg-brand-black relative overflow-hidden">
+    <!-- Membership Carousel Section -->
+    <section class="py-24 bg-brand-black relative overflow-hidden" id="membership-section">
         <div
             class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-brand-silver/[0.03] rounded-full blur-[150px]">
         </div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16 reveal">
                 <span class="text-brand-silver tracking-[0.3em] text-xs font-bold uppercase">Membership</span>
-                <h2 class="text-4xl md:text-5xl font-header font-bold mt-3">CHOOSE YOUR TIER</h2>
+                <h2 class="text-4xl md:text-5xl font-header font-bold mt-3">CHOOSE YOUR <span class="gradient-text">TIER</span></h2>
                 <div
                     class="w-20 h-[2px] mx-auto mt-6 bg-gradient-to-r from-transparent via-brand-silver to-transparent">
                 </div>
+                <p class="text-gray-400 mt-6 max-w-lg mx-auto text-sm leading-relaxed">Find the perfect plan to fuel your fitness journey. From beginner to elite — we have you covered.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
-                <!-- Silver -->
-                <div class="pricing-card glass rounded-xl p-10 reveal">
-                    <h3 class="text-2xl font-header font-bold mb-2 text-gray-300">SILVER</h3>
-                    <p class="text-4xl font-bold mb-1 text-white">LKR 5,000</p>
-                    <p class="text-gray-500 text-sm mb-8">per month</p>
-                    <div class="line-accent w-full mb-8"></div>
-                    <ul class="space-y-4 mb-10 text-gray-400 text-sm">
-                        <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>Gym Access (Off-Peak)</li>
-                        <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>Locker Room Access</li>
-                        <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>1 Induction Session</li>
-                    </ul>
-                    <a href="contact.html"
-                        class="block w-full py-3.5 border border-white/20 text-center uppercase tracking-widest text-xs font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-lg">Join
-                        Now</a>
-                </div>
-                <!-- Gold (Featured) -->
-                <div class="pricing-card featured glass-strong rounded-xl p-10 md:py-14 md:scale-105 relative z-10 reveal"
-                    style="transition-delay:150ms">
-                    <div
-                        class="absolute -top-px left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-silver to-transparent">
+
+            <!-- Carousel Container -->
+            <div class="relative max-w-7xl mx-auto reveal">
+                <!-- Left Arrow -->
+                <button id="carousel-prev" class="absolute left-0 md:-left-4 lg:-left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 glass-strong rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-all duration-300 hover:scale-110 group" aria-label="Previous plan">
+                    <svg class="w-5 h-5 md:w-6 md:h-6 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+
+                <!-- Right Arrow -->
+                <button id="carousel-next" class="absolute right-0 md:-right-4 lg:-right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 glass-strong rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-all duration-300 hover:scale-110 group" aria-label="Next plan">
+                    <svg class="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+
+                <!-- Cards Viewport -->
+                <div class="overflow-hidden mx-8 md:mx-16 lg:mx-12">
+                    <div id="carousel-track" class="flex transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]" style="will-change: transform;">
+
+                        <!-- Card 1: Starter -->
+                        <div class="carousel-card flex-shrink-0 w-full md:w-1/3 px-3 transition-all duration-700" data-index="0">
+                            <div class="membership-card glass rounded-2xl p-8 md:p-10 h-full relative overflow-hidden">
+                                <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                                <h3 class="text-xl font-header font-bold mb-1 text-gray-400">STARTER</h3>
+                                <p class="text-3xl md:text-4xl font-bold mb-1 text-white">LKR 3,000</p>
+                                <p class="text-gray-500 text-xs mb-6">per month</p>
+                                <div class="line-accent w-full mb-6"></div>
+                                <ul class="space-y-3 mb-8 text-gray-400 text-sm">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Basic Gym Access</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Locker Room Access</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Off-Peak Hours Only</li>
+                                </ul>
+                                <a href="contact.html" class="block w-full py-3 border border-white/20 text-center uppercase tracking-widest text-[10px] font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-lg">Join Now</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Bronze -->
+                        <div class="carousel-card flex-shrink-0 w-full md:w-1/3 px-3 transition-all duration-700" data-index="1">
+                            <div class="membership-card glass rounded-2xl p-8 md:p-10 h-full relative overflow-hidden">
+                                <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                                <h3 class="text-xl font-header font-bold mb-1 text-gray-400">BRONZE</h3>
+                                <p class="text-3xl md:text-4xl font-bold mb-1 text-white">LKR 4,500</p>
+                                <p class="text-gray-500 text-xs mb-6">per month</p>
+                                <div class="line-accent w-full mb-6"></div>
+                                <ul class="space-y-3 mb-8 text-gray-400 text-sm">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Full Gym Access</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Locker Room Access</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>1 Induction Session</li>
+                                </ul>
+                                <a href="contact.html" class="block w-full py-3 border border-white/20 text-center uppercase tracking-widest text-[10px] font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-lg">Join Now</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Silver -->
+                        <div class="carousel-card flex-shrink-0 w-full md:w-1/3 px-3 transition-all duration-700" data-index="2">
+                            <div class="membership-card glass rounded-2xl p-8 md:p-10 h-full relative overflow-hidden">
+                                <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                                <h3 class="text-xl font-header font-bold mb-1 text-gray-400">SILVER</h3>
+                                <p class="text-3xl md:text-4xl font-bold mb-1 text-white">LKR 5,000</p>
+                                <p class="text-gray-500 text-xs mb-6">per month</p>
+                                <div class="line-accent w-full mb-6"></div>
+                                <ul class="space-y-3 mb-8 text-gray-400 text-sm">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Gym Access (All Hours)</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>2 Group Classes/Week</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Free WiFi</li>
+                                </ul>
+                                <a href="contact.html" class="block w-full py-3 border border-white/20 text-center uppercase tracking-widest text-[10px] font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-lg">Join Now</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Gold (MOST POPULAR) -->
+                        <div class="carousel-card flex-shrink-0 w-full md:w-1/3 px-3 transition-all duration-700" data-index="3">
+                            <div class="membership-card glass-strong rounded-2xl p-8 md:p-10 h-full relative overflow-hidden border-brand-silver/30" style="border-color: rgba(160,160,160,0.3);">
+                                <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-silver to-transparent"></div>
+                                <div class="absolute top-4 right-4 bg-gradient-to-r from-brand-silver to-gray-400 text-black text-[9px] font-bold px-3 py-1 uppercase tracking-wider rounded-full">Most Popular</div>
+                                <h3 class="text-xl font-header font-bold mb-1 text-brand-silver">GOLD</h3>
+                                <p class="text-3xl md:text-4xl font-bold mb-1 text-white">LKR 8,000</p>
+                                <p class="text-gray-500 text-xs mb-6">per month</p>
+                                <div class="line-accent w-full mb-6"></div>
+                                <ul class="space-y-3 mb-8 text-gray-300 text-sm">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>24/7 Gym Access</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>All Group Classes</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Sauna Access</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Free WiFi</li>
+                                </ul>
+                                <a href="contact.html" class="btn-premium block w-full py-3 bg-gradient-to-r from-brand-silver to-gray-400 text-brand-black text-center uppercase tracking-widest text-[10px] font-bold rounded-lg">Join Now</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 5: Platinum -->
+                        <div class="carousel-card flex-shrink-0 w-full md:w-1/3 px-3 transition-all duration-700" data-index="4">
+                            <div class="membership-card glass rounded-2xl p-8 md:p-10 h-full relative overflow-hidden">
+                                <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                                <h3 class="text-xl font-header font-bold mb-1 text-gray-400">PLATINUM</h3>
+                                <p class="text-3xl md:text-4xl font-bold mb-1 text-white">LKR 12,000</p>
+                                <p class="text-gray-500 text-xs mb-6">per month</p>
+                                <div class="line-accent w-full mb-6"></div>
+                                <ul class="space-y-3 mb-8 text-gray-400 text-sm">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>All Gold Benefits</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>2 PT Sessions/Month</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Nutrition Plan</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Guest Pass (Weekend)</li>
+                                </ul>
+                                <a href="contact.html" class="block w-full py-3 border border-white/20 text-center uppercase tracking-widest text-[10px] font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-lg">Join Now</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 6: Diamond -->
+                        <div class="carousel-card flex-shrink-0 w-full md:w-1/3 px-3 transition-all duration-700" data-index="5">
+                            <div class="membership-card glass rounded-2xl p-8 md:p-10 h-full relative overflow-hidden">
+                                <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                                <h3 class="text-xl font-header font-bold mb-1 text-gray-400">DIAMOND</h3>
+                                <p class="text-3xl md:text-4xl font-bold mb-1 text-white">LKR 15,000</p>
+                                <p class="text-gray-500 text-xs mb-6">per month</p>
+                                <div class="line-accent w-full mb-6"></div>
+                                <ul class="space-y-3 mb-8 text-gray-400 text-sm">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>All Platinum Benefits</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>4 PT Sessions/Month</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Body Composition Analysis</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Priority Booking</li>
+                                </ul>
+                                <a href="contact.html" class="block w-full py-3 border border-white/20 text-center uppercase tracking-widest text-[10px] font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-lg">Join Now</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 7: Elite -->
+                        <div class="carousel-card flex-shrink-0 w-full md:w-1/3 px-3 transition-all duration-700" data-index="6">
+                            <div class="membership-card glass rounded-2xl p-8 md:p-10 h-full relative overflow-hidden">
+                                <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                                <h3 class="text-xl font-header font-bold mb-1 text-gray-400">ELITE</h3>
+                                <p class="text-3xl md:text-4xl font-bold mb-1 text-white">LKR 20,000</p>
+                                <p class="text-gray-500 text-xs mb-6">per month</p>
+                                <div class="line-accent w-full mb-6"></div>
+                                <ul class="space-y-3 mb-8 text-gray-400 text-sm">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>All Diamond Benefits</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Unlimited PT Sessions</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Custom Meal Plans</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>VIP Locker & Towel</li>
+                                </ul>
+                                <a href="contact.html" class="block w-full py-3 border border-white/20 text-center uppercase tracking-widest text-[10px] font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-lg">Join Now</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 8: Black Card -->
+                        <div class="carousel-card flex-shrink-0 w-full md:w-1/3 px-3 transition-all duration-700" data-index="7">
+                            <div class="membership-card glass rounded-2xl p-8 md:p-10 h-full relative overflow-hidden" style="border-color: rgba(160,160,160,0.15);">
+                                <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-silver/50 to-transparent"></div>
+                                <div class="absolute top-4 right-4 glass rounded-full px-3 py-1"><span class="text-[9px] text-brand-silver tracking-widest font-bold">EXCLUSIVE</span></div>
+                                <h3 class="text-xl font-header font-bold mb-1 text-brand-silver">BLACK CARD</h3>
+                                <p class="text-3xl md:text-4xl font-bold mb-1 text-white">LKR 30,000</p>
+                                <p class="text-gray-500 text-xs mb-6">per month</p>
+                                <div class="line-accent w-full mb-6"></div>
+                                <ul class="space-y-3 mb-8 text-gray-400 text-sm">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Full Elite Benefits</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Private Training Room</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>2 Guest Passes/Month</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Branded Merchandise</li>
+                                </ul>
+                                <a href="contact.html" class="block w-full py-3 border border-brand-silver/40 text-center uppercase tracking-widest text-[10px] font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-lg text-brand-silver">Join Now</a>
+                            </div>
+                        </div>
+
                     </div>
-                    <div
-                        class="absolute top-4 right-4 bg-gradient-to-r from-brand-silver to-gray-400 text-black text-[10px] font-bold px-3 py-1 uppercase tracking-wider rounded-full">
-                        Most Popular</div>
-                    <h3 class="text-2xl font-header font-bold mb-2 text-brand-silver">GOLD</h3>
-                    <p class="text-4xl font-bold mb-1 text-white">LKR 8,000</p>
-                    <p class="text-gray-500 text-sm mb-8">per month</p>
-                    <div class="line-accent w-full mb-8"></div>
-                    <ul class="space-y-4 mb-10 text-gray-300 text-sm">
-                        <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>24/7 Gym Access</li>
-                        <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>All Group Classes</li>
-                        <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>Sauna Access</li>
-                        <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>Free WiFi</li>
-                    </ul>
-                    <a href="contact.html"
-                        class="btn-premium block w-full py-3.5 bg-gradient-to-r from-brand-silver to-gray-400 text-brand-black text-center uppercase tracking-widest text-xs font-bold rounded-lg">Join
-                        Now</a>
                 </div>
-                <!-- Platinum -->
-                <div class="pricing-card glass rounded-xl p-10 reveal" style="transition-delay:300ms">
-                    <h3 class="text-2xl font-header font-bold mb-2 text-gray-300">PLATINUM</h3>
-                    <p class="text-4xl font-bold mb-1 text-white">LKR 15,000</p>
-                    <p class="text-gray-500 text-sm mb-8">per month</p>
-                    <div class="line-accent w-full mb-8"></div>
-                    <ul class="space-y-4 mb-10 text-gray-400 text-sm">
-                        <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>All Gold Benefits</li>
-                        <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>2 Personal Training Sessions</li>
-                        <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>Nutrition Plan</li>
-                        <li class="flex items-center"><svg class="w-4 h-4 text-brand-silver mr-3 flex-shrink-0"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>Bring a Friend (Weekend)</li>
-                    </ul>
-                    <a href="contact.html"
-                        class="block w-full py-3.5 border border-white/20 text-center uppercase tracking-widest text-xs font-bold hover:bg-white hover:text-black transition-all duration-300 rounded-lg">Join
-                        Now</a>
+
+                <!-- Dots Indicator -->
+                <div class="flex justify-center gap-2 mt-10" id="carousel-dots">
+                    <button class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/20 transition-all duration-300" data-dot="0"></button>
+                    <button class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/20 transition-all duration-300" data-dot="1"></button>
+                    <button class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/20 transition-all duration-300" data-dot="2"></button>
+                    <button class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/20 transition-all duration-300" data-dot="3"></button>
+                    <button class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/20 transition-all duration-300" data-dot="4"></button>
+                    <button class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/20 transition-all duration-300" data-dot="5"></button>
+                    <button class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/20 transition-all duration-300" data-dot="6"></button>
+                    <button class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/20 transition-all duration-300" data-dot="7"></button>
                 </div>
             </div>
         </div>
     </section>
+
+    <style>
+        .carousel-card {
+            opacity: 0.4;
+            transform: scale(0.85);
+            filter: blur(1px);
+            pointer-events: none;
+        }
+        .carousel-card.active-card {
+            opacity: 1;
+            transform: scale(1.05);
+            filter: blur(0);
+            pointer-events: auto;
+            z-index: 10;
+        }
+        .carousel-card.adjacent-card {
+            opacity: 0.55;
+            transform: scale(0.92);
+            filter: blur(0);
+            pointer-events: auto;
+        }
+        .carousel-card.active-card .membership-card {
+            box-shadow: 0 0 60px rgba(160, 160, 160, 0.08), 0 30px 60px rgba(0,0,0,0.5);
+        }
+        .carousel-dot.active-dot {
+            background: linear-gradient(135deg, #ffffff, #a0a0a0) !important;
+            width: 2rem;
+            border-radius: 9999px;
+        }
+        @media (max-width: 767px) {
+            .carousel-card {
+                width: 85% !important;
+                margin: 0 auto;
+            }
+            .carousel-card.active-card {
+                transform: scale(1);
+            }
+            .carousel-card.adjacent-card {
+                transform: scale(0.88);
+            }
+        }
+    </style>
+
+    <script>
+    (function() {
+        const track = document.getElementById('carousel-track');
+        const cards = document.querySelectorAll('.carousel-card');
+        const prevBtn = document.getElementById('carousel-prev');
+        const nextBtn = document.getElementById('carousel-next');
+        const dots = document.querySelectorAll('.carousel-dot');
+        const totalCards = cards.length;
+        let currentIndex = 3; // Start at Gold (Most Popular)
+        let isAnimating = false;
+
+        function getCardWidth() {
+            if (window.innerWidth < 768) return 85;
+            return 33.333;
+        }
+
+        function updateCarousel() {
+            const cardWidth = getCardWidth();
+            const centerOffset = (100 - cardWidth) / 2;
+            const translateX = -(currentIndex * cardWidth) + centerOffset;
+            track.style.transform = `translateX(${translateX}%)`;
+
+            cards.forEach((card, i) => {
+                card.classList.remove('active-card', 'adjacent-card');
+                if (i === currentIndex) {
+                    card.classList.add('active-card');
+                } else if (i === currentIndex - 1 || i === currentIndex + 1) {
+                    card.classList.add('adjacent-card');
+                }
+            });
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active-dot', i === currentIndex);
+            });
+        }
+
+        function goTo(index) {
+            if (isAnimating) return;
+            isAnimating = true;
+            currentIndex = Math.max(0, Math.min(totalCards - 1, index));
+            updateCarousel();
+            setTimeout(() => { isAnimating = false; }, 700);
+        }
+
+        prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+        nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                goTo(parseInt(dot.dataset.dot));
+            });
+        });
+
+        // Touch/swipe support
+        let startX = 0, startY = 0, isDragging = false;
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isDragging = true;
+        }, { passive: true });
+        track.addEventListener('touchmove', (e) => {}, { passive: true });
+        track.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            const diffX = startX - e.changedTouches[0].clientX;
+            const diffY = startY - e.changedTouches[0].clientY;
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                if (diffX > 0) goTo(currentIndex + 1);
+                else goTo(currentIndex - 1);
+            }
+        }, { passive: true });
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            const section = document.getElementById('membership-section');
+            const rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                if (e.key === 'ArrowLeft') goTo(currentIndex - 1);
+                if (e.key === 'ArrowRight') goTo(currentIndex + 1);
+            }
+        });
+
+        updateCarousel();
+        window.addEventListener('resize', updateCarousel);
+    })();
+    </script>
 
     <!-- Parallax CTA -->
     <section class="relative py-32 flex items-center justify-center overflow-hidden">

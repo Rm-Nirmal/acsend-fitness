@@ -7,6 +7,9 @@
     <title>ASCEND - Luxury Fitness | Matale</title>
     <meta name="description"
         content="Experience the pinnacle of fitness at ASCEND, Matale's premier luxury gym. World-class equipment, expert trainers, and 24/7 access.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap"
@@ -25,37 +28,46 @@
         }
     </script>
     <style>
+        * { -webkit-tap-highlight-color: transparent; }
+        html { -webkit-text-size-adjust: 100%; }
+
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease-out;
+            transform: translateY(40px) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
 
         .reveal.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) translateZ(0);
+            will-change: auto;
         }
 
         .reveal-left {
             opacity: 0;
-            transform: translateX(-60px);
-            transition: all 1s ease-out;
+            transform: translateX(-40px) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
 
         .reveal-left.active {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateX(0) translateZ(0);
+            will-change: auto;
         }
 
         .reveal-right {
             opacity: 0;
-            transform: translateX(60px);
-            transition: all 1s ease-out;
+            transform: translateX(40px) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
 
         .reveal-right.active {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateX(0) translateZ(0);
+            will-change: auto;
         }
 
         @keyframes float {
@@ -332,80 +344,82 @@
 
         /* ===== MOBILE RESPONSIVE ===== */
         @media (max-width: 767px) {
-            .hero-title {
-                font-size: 3.5rem !important;
+            /* Reduce animation distances for smoother mobile experience */
+            .reveal { transform: translateY(25px) translateZ(0); transition-duration: 0.5s; }
+            .reveal-left { transform: translateX(-25px) translateZ(0); transition-duration: 0.5s; }
+            .reveal-right { transform: translateX(25px) translateZ(0); transition-duration: 0.5s; }
+
+            /* Reduce heavy blur effects on mobile for performance */
+            .pulse-glow { animation: none !important; opacity: 0.15; }
+            [class*="blur-[100px]"], [class*="blur-[120px]"], [class*="blur-[150px]"] {
+                filter: blur(60px) !important;
             }
 
-            .hero-subtitle {
-                font-size: 0.75rem !important;
-            }
-
-            .hero-desc {
-                font-size: 0.875rem !important;
-            }
-
-            .section-title {
-                font-size: 2rem !important;
-            }
+            .hero-title { font-size: 3.5rem !important; }
+            .hero-subtitle { font-size: 0.75rem !important; }
+            .hero-desc { font-size: 0.875rem !important; }
+            .section-title { font-size: 2rem !important; }
 
             .service-card {
-                height: 320px !important;
+                height: 300px !important;
+                /* Disable hover effects on touch */
+                transform: none !important;
             }
+            .service-card:active { transform: scale(0.98) !important; }
 
             .feature-card {
                 padding: 1.5rem !important;
+                transform: none !important;
             }
 
-            .stat-item {
-                padding: 1.25rem !important;
-            }
-
-            .stat-item h3 {
-                font-size: 1.75rem !important;
-            }
+            .stat-item { padding: 1.25rem !important; }
+            .stat-item h3 { font-size: 1.75rem !important; }
 
             .phone-mockup {
                 width: 220px !important;
                 height: 460px !important;
             }
 
-            .app-title {
-                font-size: 2.5rem !important;
-            }
+            /* App section mobile fixes */
+            .app-title { font-size: 2.5rem !important; }
+            #app-section { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+            #app-section .flex.flex-col.md\:flex-row { gap: 2.5rem !important; }
+            #app-section .text-5xl { font-size: 2.5rem !important; }
+            #app-section .text-lg { font-size: 0.9375rem !important; }
+            #app-section .floating { animation: none !important; }
 
-            footer .container {
-                padding-left: 1.25rem;
-                padding-right: 1.25rem;
-            }
+            /* Buttons should be full-width on mobile */
+            .btn-premium { transform: none !important; }
+            .btn-premium:active { transform: scale(0.97) !important; }
 
-            .footer-grid {
-                flex-direction: column !important;
-                gap: 2rem !important;
-            }
+            footer .container { padding-left: 1.25rem; padding-right: 1.25rem; }
+            .footer-grid { flex-direction: column !important; gap: 2rem !important; }
+            .footer-links { flex-direction: row !important; gap: 2.5rem !important; }
 
-            .footer-links {
-                flex-direction: row !important;
-                gap: 2.5rem !important;
-            }
+            /* Sections padding */
+            section { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+            section .mb-20, section .mb-16 { margin-bottom: 2.5rem !important; }
         }
 
         @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2.8rem !important;
-            }
+            .hero-title { font-size: 2.8rem !important; }
+            .service-card { height: 260px !important; }
+            .phone-mockup { width: 200px !important; height: 420px !important; }
+            .app-title { font-size: 2rem !important; }
+            #app-section .text-5xl { font-size: 2rem !important; }
 
-            .service-card {
-                height: 280px !important;
-            }
+            /* Reduce section padding further on very small screens */
+            section { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+            .container { padding-left: 1rem !important; padding-right: 1rem !important; }
+        }
 
-            .phone-mockup {
-                width: 200px !important;
-                height: 420px !important;
-            }
-
-            .app-title {
-                font-size: 2rem !important;
-            }
+        /* Smooth page load animation */
+        @keyframes pageLoad {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        body {
+            animation: pageLoad 0.4s ease-out;
         }
     </style>
 </head>
@@ -556,7 +570,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="service-card group relative h-[420px] overflow-hidden cursor-pointer rounded-xl reveal">
-                    <img src="assets/IMG_2484.jfif" alt="Cardio"
+                    <img src="assets/IMG_2484.jfif" alt="Cardio" loading="lazy" decoding="async"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                     <div class="absolute top-6 left-6 glass rounded-full px-4 py-1.5"><span
@@ -572,7 +586,7 @@
                 </div>
                 <div class="service-card group relative h-[420px] overflow-hidden cursor-pointer rounded-xl reveal"
                     style="transition-delay:150ms">
-                    <img src="assets/IMG_2487.jfif" alt="Weights"
+                    <img src="assets/IMG_2487.jfif" alt="Weights" loading="lazy" decoding="async"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                     <div class="absolute top-6 left-6 glass rounded-full px-4 py-1.5"><span
@@ -588,7 +602,7 @@
                 </div>
                 <div class="service-card group relative h-[420px] overflow-hidden cursor-pointer rounded-xl reveal"
                     style="transition-delay:300ms">
-                    <img src="assets/IMG_2493.jfif" alt="Personal Training"
+                    <img src="assets/IMG_2493.jfif" alt="Personal Training" loading="lazy" decoding="async"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                     <div class="absolute top-6 left-6 glass rounded-full px-4 py-1.5"><span
@@ -679,7 +693,7 @@
     <!-- Your Transformation -->
     <section class="py-24 bg-brand-dark relative overflow-hidden">
         <div class="absolute inset-0">
-            <img src="assets/IMG_2496.jfif" class="w-full h-full object-cover opacity-10" alt="">
+            <img src="assets/IMG_2496.jfif" class="w-full h-full object-cover opacity-10" alt="" loading="lazy" decoding="async">
             <div class="absolute inset-0 bg-gradient-to-b from-brand-dark via-brand-dark/95 to-brand-dark"></div>
         </div>
         <div class="absolute top-10 left-10 w-60 h-60 bg-brand-silver/5 rounded-full blur-[80px] pulse-glow"></div>
@@ -780,7 +794,7 @@
                         workout plans, track your progress, and book classes instantly. The Ascend app is your digital
                         companion for a superior lifestyle.</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="#"
+                        <a href="coming-soon.html"
                             class="btn-premium group relative px-8 py-4 bg-gradient-to-r from-brand-white to-gray-400 text-brand-black rounded-lg font-bold flex items-center gap-4">
                             <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -791,7 +805,7 @@
                                 <div class="text-lg leading-none">Google Play</div>
                             </div>
                         </a>
-                        <a href="#"
+                        <a href="coming-soon.html"
                             class="group relative px-8 py-4 glass text-white rounded-lg font-bold flex items-center gap-4 hover:bg-white/10 transition-all hover:scale-105">
                             <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor">
                                 <path
@@ -812,7 +826,7 @@
                             <div
                                 class="absolute top-0 left-1/2 -translate-x-1/2 w-[40%] h-[24px] sm:h-[28px] bg-gray-800 rounded-b-[1rem] z-20">
                             </div>
-                            <img src="assets/IMG_2504.jfif" alt="App Interface"
+                            <img src="assets/IMG_2504.jfif" alt="App Interface" loading="lazy" decoding="async"
                                 class="w-full h-full object-cover opacity-80 mix-blend-overlay">
                             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80">
                             </div>

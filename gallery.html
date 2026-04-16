@@ -7,6 +7,9 @@
     <title>Gallery - ASCEND | Visual Tour of Our Facility</title>
     <meta name="description"
         content="Take a virtual tour of ASCEND's world-class fitness facility in Matale. Explore our premium equipment, ambiance, and spaces.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap"
@@ -22,27 +25,22 @@
         }
     </script>
     <style>
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
+        * { -webkit-tap-highlight-color: transparent; }
+        html { -webkit-text-size-adjust: 100%; }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        .reveal {
+            opacity: 0; transform: translateY(20px) translateZ(0);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            will-change: opacity, transform;
         }
+        .reveal.active { opacity: 1; transform: translateY(0) translateZ(0); will-change: auto; }
 
         .reveal-scale {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: all 0.8s ease-out;
+            opacity: 0; transform: scale(0.95) translateZ(0);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            will-change: opacity, transform;
         }
-
-        .reveal-scale.active {
-            opacity: 1;
-            transform: scale(1);
-        }
+        .reveal-scale.active { opacity: 1; transform: scale(1) translateZ(0); will-change: auto; }
 
         @keyframes pulse-glow {
 
@@ -361,7 +359,7 @@
                 <!-- Assetz Images - Primary Gallery -->
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2484.jfif" alt="Gym Equipment"
+                    <img src="assets/IMG_2484.jfif" alt="Gym Equipment" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -377,7 +375,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2485.jfif" alt="Training Zone"
+                    <img src="assets/IMG_2485.jfif" alt="Training Zone" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -387,7 +385,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2486.jfif" alt="Workout Area"
+                    <img src="assets/IMG_2486.jfif" alt="Workout Area" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -397,7 +395,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2487.jfif" alt="Strength Training"
+                    <img src="assets/IMG_2487.jfif" alt="Strength Training" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -407,7 +405,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2488.jfif" alt="Premium Equipment"
+                    <img src="assets/IMG_2488.jfif" alt="Premium Equipment" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -417,7 +415,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2490.jfif" alt="Personal Training"
+                    <img src="assets/IMG_2490.jfif" alt="Personal Training" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -427,7 +425,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2491.jfif" alt="Gym Ambiance"
+                    <img src="assets/IMG_2491.jfif" alt="Gym Ambiance" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -437,7 +435,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2492.jfif" alt="Fitness Zone"
+                    <img src="assets/IMG_2492.jfif" alt="Fitness Zone" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -447,7 +445,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2493.jfif" alt="Workout Sessions"
+                    <img src="assets/IMG_2493.jfif" alt="Workout Sessions" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -457,7 +455,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2494.jfif" alt="Gym Floor"
+                    <img src="assets/IMG_2494.jfif" alt="Gym Floor" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -467,7 +465,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2495.jfif" alt="Group Training"
+                    <img src="assets/IMG_2495.jfif" alt="Group Training" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -477,7 +475,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2496.jfif" alt="Gym Interior"
+                    <img src="assets/IMG_2496.jfif" alt="Gym Interior" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -487,7 +485,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2497.jfif" alt="Weight Room"
+                    <img src="assets/IMG_2497.jfif" alt="Weight Room" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -497,7 +495,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2498.jfif" alt="Training Setup"
+                    <img src="assets/IMG_2498.jfif" alt="Training Setup" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -507,7 +505,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2499.jfif" alt="Lifting Area"
+                    <img src="assets/IMG_2499.jfif" alt="Lifting Area" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -517,7 +515,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2500.jfif" alt="Gym Panorama"
+                    <img src="assets/IMG_2500.jfif" alt="Gym Panorama" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -527,7 +525,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2501.jfif" alt="Machine Area"
+                    <img src="assets/IMG_2501.jfif" alt="Machine Area" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -537,7 +535,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2502.jfif" alt="Recovery Zone"
+                    <img src="assets/IMG_2502.jfif" alt="Recovery Zone" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -547,7 +545,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2503.jfif" alt="Cardio Section"
+                    <img src="assets/IMG_2503.jfif" alt="Cardio Section" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -557,7 +555,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2504.jfif" alt="Functional Training"
+                    <img src="assets/IMG_2504.jfif" alt="Functional Training" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -567,7 +565,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2506.jfif" alt="Power Rack"
+                    <img src="assets/IMG_2506.jfif" alt="Power Rack" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -577,7 +575,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2507.jfif" alt="Free Weights Area"
+                    <img src="assets/IMG_2507.jfif" alt="Free Weights Area" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -587,7 +585,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2508.jfif" alt="Gym Lighting"
+                    <img src="assets/IMG_2508.jfif" alt="Gym Lighting" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -599,7 +597,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2513.jfif" alt="Premium Space"
+                    <img src="assets/IMG_2513.jfif" alt="Premium Space" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -609,7 +607,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2294.jfif" alt="Training Area"
+                    <img src="assets/IMG_2294.jfif" alt="Training Area" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -620,7 +618,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2408.jfif" alt="Gym Lifestyle"
+                    <img src="assets/IMG_2408.jfif" alt="Gym Lifestyle" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
@@ -630,7 +628,7 @@
 
                 <div class="gallery-item gallery-card group relative overflow-hidden rounded-xl cursor-pointer reveal"
                     onclick="openLightbox(this)">
-                    <img src="assets/IMG_2911.jfif" alt="Athletes"
+                    <img src="assets/IMG_2911.jfif" alt="Athletes" loading="lazy" decoding="async"
                         class="w-full h-auto transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">

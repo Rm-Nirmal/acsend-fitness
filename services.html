@@ -7,6 +7,9 @@
     <title>Services - ASCEND | Programs & Memberships</title>
     <meta name="description"
         content="Explore ASCEND's premium fitness programs, personal training, group classes, and membership tiers. Start your transformation today.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap"
@@ -22,48 +25,59 @@
         }
     </script>
     <style>
+        * { -webkit-tap-highlight-color: transparent; }
+        html { -webkit-text-size-adjust: 100%; }
+
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease-out;
+            transform: translateY(40px) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
 
         .reveal.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) translateZ(0);
+            will-change: auto;
         }
 
         .reveal-left {
             opacity: 0;
-            transform: translateX(-60px);
-            transition: all 1s ease-out;
+            transform: translateX(-40px) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
 
         .reveal-left.active {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateX(0) translateZ(0);
+            will-change: auto;
         }
 
         .reveal-right {
             opacity: 0;
-            transform: translateX(60px);
-            transition: all 1s ease-out;
+            transform: translateX(40px) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
 
         .reveal-right.active {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateX(0) translateZ(0);
+            will-change: auto;
         }
 
         .reveal-scale {
             opacity: 0;
-            transform: scale(0.85);
-            transition: all 1s ease-out;
+            transform: scale(0.9) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
 
         .reveal-scale.active {
             opacity: 1;
-            transform: scale(1);
+            transform: scale(1) translateZ(0);
+            will-change: auto;
         }
 
         @keyframes pulse-glow {
@@ -284,38 +298,57 @@
         }
 
         @media (max-width: 767px) {
-            .hero-title {
-                font-size: 3.5rem !important;
-            }
+            /* Reduce animation distances for smoother mobile */
+            .reveal { transform: translateY(25px) translateZ(0); transition-duration: 0.5s; }
+            .reveal-left { transform: translateX(-25px) translateZ(0); transition-duration: 0.5s; }
+            .reveal-right { transform: translateX(25px) translateZ(0); transition-duration: 0.5s; }
+            .reveal-scale { transform: scale(0.95) translateZ(0); transition-duration: 0.5s; }
 
-            .section-title {
-                font-size: 2rem !important;
-            }
+            /* Reduce blur for mobile perf */
+            .pulse-glow { animation: none !important; opacity: 0.15; }
+
+            .hero-title { font-size: 2.5rem !important; }
+            .section-title { font-size: 2rem !important; }
 
             .service-card {
-                height: 320px !important;
+                height: 300px !important;
+                transform: none !important;
             }
+            .service-card:active { transform: scale(0.98) !important; }
 
-            .footer-grid {
-                flex-direction: column !important;
-                gap: 2rem !important;
-            }
+            .pricing-card { padding: 2rem !important; transform: none !important; }
+            .step-circle { width: 5rem !important; height: 5rem !important; }
 
-            .footer-links {
-                flex-direction: row !important;
-                gap: 2.5rem !important;
-            }
+            /* Section spacing */
+            section { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+            section .mb-20, section .mb-16 { margin-bottom: 2.5rem !important; }
+
+            /* CTA section */
+            .relative.py-32 { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+
+            /* Footer mobile */
+            footer .container { padding-left: 1.25rem; padding-right: 1.25rem; }
+            .footer-grid { flex-direction: column !important; gap: 2rem !important; }
+            .footer-links { flex-direction: row !important; gap: 2.5rem !important; }
+
+            .btn-premium { transform: none !important; }
+            .btn-premium:active { transform: scale(0.97) !important; }
         }
 
         @media (max-width: 480px) {
-            .hero-title {
-                font-size: 2.8rem !important;
-            }
+            .hero-title { font-size: 2rem !important; }
+            .service-card { height: 260px !important; }
+            .pricing-card { padding: 1.5rem !important; }
+            .pricing-card h3 { font-size: 1.25rem !important; }
+            .step-circle { width: 4rem !important; height: 4rem !important; }
 
-            .service-card {
-                height: 280px !important;
-            }
+            section { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+            .container { padding-left: 1rem !important; padding-right: 1rem !important; }
         }
+
+        /* Smooth page load */
+        @keyframes pageLoad { from { opacity: 0; } to { opacity: 1; } }
+        body { animation: pageLoad 0.4s ease-out; }
     </style>
 </head>
 
@@ -424,7 +457,7 @@
         <div class="container mx-auto px-6 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="service-card group relative h-[420px] overflow-hidden rounded-xl reveal">
-                    <img src="assets/IMG_2490.jfif"
+                    <img src="assets/IMG_2490.jfif" loading="lazy" decoding="async"
                         class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-70">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
                     <div class="absolute top-6 left-6 glass rounded-full px-4 py-1.5">
@@ -445,7 +478,7 @@
                 </div>
                 <div class="service-card group relative h-[420px] overflow-hidden rounded-xl reveal"
                     style="transition-delay:150ms">
-                    <img src="assets/IMG_2495.jfif"
+                    <img src="assets/IMG_2495.jfif" loading="lazy" decoding="async"
                         class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-70">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
                     <div class="absolute top-6 left-6 glass rounded-full px-4 py-1.5">
@@ -465,7 +498,7 @@
                     </div>
                 </div>
                 <div class="service-card group relative h-[420px] overflow-hidden rounded-xl reveal">
-                    <img src="assets/IMG_2502.jfif"
+                    <img src="assets/IMG_2502.jfif" loading="lazy" decoding="async"
                         class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-70">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
                     <div class="absolute top-6 left-6 glass rounded-full px-4 py-1.5">
@@ -486,7 +519,7 @@
                 </div>
                 <div class="service-card group relative h-[420px] overflow-hidden rounded-xl reveal"
                     style="transition-delay:150ms">
-                    <img src="assets/IMG_2498.jfif"
+                    <img src="assets/IMG_2498.jfif" loading="lazy" decoding="async"
                         class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-70">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
                     <div class="absolute top-6 left-6 glass rounded-full px-4 py-1.5">
@@ -704,42 +737,70 @@
     <style>
         .carousel-card {
             opacity: 0.4;
-            transform: scale(0.85);
+            transform: scale(0.85) translateZ(0);
             filter: blur(1px);
             pointer-events: none;
+            will-change: transform, opacity;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .carousel-card.active-card {
             opacity: 1;
-            transform: scale(1.05);
+            transform: scale(1.05) translateZ(0);
             filter: blur(0);
             pointer-events: auto;
             z-index: 10;
         }
         .carousel-card.adjacent-card {
             opacity: 0.55;
-            transform: scale(0.92);
+            transform: scale(0.92) translateZ(0);
             filter: blur(0);
             pointer-events: auto;
         }
         .carousel-card.active-card .membership-card {
             box-shadow: 0 0 60px rgba(160, 160, 160, 0.08), 0 30px 60px rgba(0,0,0,0.5);
         }
+        .carousel-dot {
+            touch-action: manipulation;
+        }
         .carousel-dot.active-dot {
             background: linear-gradient(135deg, #ffffff, #a0a0a0) !important;
             width: 2rem;
             border-radius: 9999px;
         }
+        #carousel-prev, #carousel-next {
+            transition: opacity 0.3s ease, transform 0.2s ease, background 0.2s ease;
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        #carousel-prev:active, #carousel-next:active {
+            transform: translateY(-50%) scale(0.9) !important;
+        }
+        #carousel-prev.carousel-arrow-hidden,
+        #carousel-next.carousel-arrow-hidden {
+            opacity: 0 !important;
+            pointer-events: none;
+            transform: translateY(-50%) scale(0.8) !important;
+        }
         @media (max-width: 767px) {
             .carousel-card {
-                width: 85% !important;
+                width: 88% !important;
                 margin: 0 auto;
+                filter: none !important;
+                transition-duration: 0.4s;
             }
             .carousel-card.active-card {
-                transform: scale(1);
+                transform: scale(1) translateZ(0);
             }
             .carousel-card.adjacent-card {
-                transform: scale(0.88);
+                transform: scale(0.92) translateZ(0);
+                opacity: 0.4;
             }
+            #carousel-prev, #carousel-next {
+                width: 2.5rem !important;
+                height: 2.5rem !important;
+            }
+            .membership-card { padding: 1.5rem !important; }
         }
     </style>
 
@@ -752,18 +813,32 @@
         const dots = document.querySelectorAll('.carousel-dot');
         const totalCards = cards.length;
         let currentIndex = 3; // Start at Gold (Most Popular)
-        let isAnimating = false;
+        let pendingIndex = null;
+        let rafId = null;
 
         function getCardWidth() {
-            if (window.innerWidth < 768) return 85;
+            if (window.innerWidth < 768) return 88;
             return 33.333;
+        }
+
+        function updateArrows() {
+            if (currentIndex <= 0) {
+                prevBtn.classList.add('carousel-arrow-hidden');
+            } else {
+                prevBtn.classList.remove('carousel-arrow-hidden');
+            }
+            if (currentIndex >= totalCards - 1) {
+                nextBtn.classList.add('carousel-arrow-hidden');
+            } else {
+                nextBtn.classList.remove('carousel-arrow-hidden');
+            }
         }
 
         function updateCarousel() {
             const cardWidth = getCardWidth();
             const centerOffset = (100 - cardWidth) / 2;
             const translateX = -(currentIndex * cardWidth) + centerOffset;
-            track.style.transform = `translateX(${translateX}%)`;
+            track.style.transform = `translateX(${translateX}%) translateZ(0)`;
 
             cards.forEach((card, i) => {
                 card.classList.remove('active-card', 'adjacent-card');
@@ -777,14 +852,24 @@
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active-dot', i === currentIndex);
             });
+
+            updateArrows();
         }
 
+        // Debounced goTo: allows rapid clicks by batching with rAF
         function goTo(index) {
-            if (isAnimating) return;
-            isAnimating = true;
-            currentIndex = Math.max(0, Math.min(totalCards - 1, index));
-            updateCarousel();
-            setTimeout(() => { isAnimating = false; }, 700);
+            const newIndex = Math.max(0, Math.min(totalCards - 1, index));
+            if (newIndex === currentIndex) return;
+            pendingIndex = newIndex;
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+                if (pendingIndex !== null) {
+                    currentIndex = pendingIndex;
+                    pendingIndex = null;
+                    updateCarousel();
+                }
+                rafId = null;
+            });
         }
 
         prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
@@ -796,11 +881,12 @@
             });
         });
 
-        // Touch/swipe support
-        let startX = 0, startY = 0, isDragging = false;
+        // Touch/swipe support — improved with velocity detection
+        let startX = 0, startY = 0, startTime = 0, isDragging = false;
         track.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
             startY = e.touches[0].clientY;
+            startTime = Date.now();
             isDragging = true;
         }, { passive: true });
         track.addEventListener('touchmove', (e) => {}, { passive: true });
@@ -809,7 +895,11 @@
             isDragging = false;
             const diffX = startX - e.changedTouches[0].clientX;
             const diffY = startY - e.changedTouches[0].clientY;
-            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            const elapsed = Date.now() - startTime;
+            const velocity = Math.abs(diffX) / elapsed;
+            // Swipe threshold: either enough distance or enough velocity
+            const isSwipe = (Math.abs(diffX) > Math.abs(diffY)) && (Math.abs(diffX) > 40 || velocity > 0.3);
+            if (isSwipe) {
                 if (diffX > 0) goTo(currentIndex + 1);
                 else goTo(currentIndex - 1);
             }
@@ -826,14 +916,19 @@
         });
 
         updateCarousel();
-        window.addEventListener('resize', updateCarousel);
+        // Debounced resize handler
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(updateCarousel, 150);
+        });
     })();
     </script>
 
     <!-- Parallax CTA -->
     <section class="relative py-32 flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="assets/IMG_2513.jfif" alt="Ascend Fitness Athlete"
+            <img src="assets/IMG_2513.jfif" alt="Ascend Fitness Athlete" loading="lazy" decoding="async"
                 class="w-full h-full object-cover object-[40%_75%] transition-transform duration-[2s] hover:scale-105">
             <div class="absolute inset-0 bg-brand-black/85"></div>
         </div>

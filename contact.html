@@ -7,6 +7,9 @@
     <title>Contact - ASCEND | Luxury Fitness Matale</title>
     <meta name="description"
         content="Get in touch with ASCEND, Matale's premier luxury fitness facility. Book a tour, inquire about memberships, or reach out to our team.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap"
@@ -24,49 +27,36 @@
         }
     </script>
     <style>
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease-out;
-        }
+        * { -webkit-tap-highlight-color: transparent; }
+        html { -webkit-text-size-adjust: 100%; }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        .reveal {
+            opacity: 0; transform: translateY(40px) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
+        .reveal.active { opacity: 1; transform: translateY(0) translateZ(0); will-change: auto; }
 
         .reveal-left {
-            opacity: 0;
-            transform: translateX(-60px);
-            transition: all 1s ease-out;
+            opacity: 0; transform: translateX(-40px) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
-
-        .reveal-left.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .reveal-left.active { opacity: 1; transform: translateX(0) translateZ(0); will-change: auto; }
 
         .reveal-right {
-            opacity: 0;
-            transform: translateX(60px);
-            transition: all 1s ease-out;
+            opacity: 0; transform: translateX(40px) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
-
-        .reveal-right.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .reveal-right.active { opacity: 1; transform: translateX(0) translateZ(0); will-change: auto; }
 
         .reveal-scale {
-            opacity: 0;
-            transform: scale(0.85);
-            transition: all 1s ease-out;
+            opacity: 0; transform: scale(0.9) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
-
-        .reveal-scale.active {
-            opacity: 1;
-            transform: scale(1);
-        }
+        .reveal-scale.active { opacity: 1; transform: scale(1) translateZ(0); will-change: auto; }
 
         @keyframes float {
 
@@ -601,8 +591,8 @@
                         <form id="contactForm" class="space-y-8 relative z-10" action="https://api.web3forms.com/submit"
                             method="POST">
                             <input type="hidden" name="access_key" value="20e21b3b-4cc6-402e-8ade-cbc34ca715fe">
-                            <input type="hidden" name="subject" value="New Membership Inquiry | ASCEND FITNESS Studios">
-                            <input type="hidden" name="from_name" value="ASCEND FITNESS Studios">
+                            <input type="hidden" name="subject" value="New Membership Inquiry | ASCEND FITNESS STUDIOS">
+                            <input type="hidden" name="from_name" value="ASCEND FITNESS STUDIOS">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                                 <div class="group relative">
@@ -735,7 +725,7 @@
     <!-- Image Showcase Section -->
     <section class="relative h-[70vh] overflow-hidden reveal">
         <div class="absolute inset-0">
-            <img src="assets/IMG_2513.jfif" alt="Ascend Fitness Athlete"
+            <img src="assets/IMG_2513.jfif" alt="Ascend Fitness Athlete" loading="lazy" decoding="async"
                 class="w-full h-full object-cover object-[40%_75%] transition-transform duration-[2s] hover:scale-105">
             <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-black/50 to-brand-black/30"></div>
             <div class="absolute inset-0 bg-gradient-to-r from-brand-black/60 via-transparent to-brand-black/60"></div>
@@ -778,7 +768,8 @@
             <div class="absolute inset-0 pointer-events-none border-[16px] border-brand-black/50"></div>
             <!-- Map overlay label -->
             <div class="absolute bottom-8 left-8 glass-strong px-6 py-4 rounded-xl z-10">
-                <p class="font-header font-bold tracking-widest text-sm">ASCEND<span class="text-brand-silver">.</span></p>
+                <p class="font-header font-bold tracking-widest text-sm">ASCEND<span class="text-brand-silver">.</span>
+                </p>
                 <p class="text-gray-400 text-xs mt-1">King Street, Matale Town</p>
             </div>
         </div>
@@ -786,18 +777,25 @@
         <div class="bg-brand-black py-6 flex justify-center">
             <a href="https://maps.app.goo.gl/bSzehVNJG1YJFAsR6" target="_blank" rel="noopener noreferrer"
                 class="group inline-flex items-center gap-3 px-8 py-4 glass-strong rounded-xl hover:border-brand-silver/40 transition-all duration-500 hover:shadow-[0_0_30px_rgba(160,160,160,0.1)] hover:-translate-y-1">
-                <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-gradient-to-r group-hover:from-brand-silver group-hover:to-gray-400 transition-all duration-500">
-                    <svg class="w-5 h-5 text-brand-silver group-hover:text-brand-black transition-colors duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <div
+                    class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-gradient-to-r group-hover:from-brand-silver group-hover:to-gray-400 transition-all duration-500">
+                    <svg class="w-5 h-5 text-brand-silver group-hover:text-brand-black transition-colors duration-500"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                        </path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
                 </div>
                 <div>
                     <div class="text-[10px] text-gray-500 tracking-widest uppercase">Get Directions</div>
                     <div class="text-white font-header font-bold tracking-wider text-sm">OPEN IN GOOGLE MAPS</div>
                 </div>
-                <svg class="w-4 h-4 text-brand-silver ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                <svg class="w-4 h-4 text-brand-silver ml-2 group-hover:translate-x-1 transition-transform duration-300"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                 </svg>
             </a>
         </div>

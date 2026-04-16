@@ -59,21 +59,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') closeMenu();
     });
 
-    // Navbar scroll effect
+    // Navbar scroll effect - throttled with requestAnimationFrame
+    let ticking = false;
     window.addEventListener('scroll', () => {
-        if (!navbar) return;
-        if (window.scrollY > 50) {
-            navbar.classList.add('navbar-scrolled');
-        } else {
-            navbar.classList.remove('navbar-scrolled');
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                if (!navbar) { ticking = false; return; }
+                if (window.scrollY > 50) {
+                    navbar.classList.add('navbar-scrolled');
+                } else {
+                    navbar.classList.remove('navbar-scrolled');
+                }
+                ticking = false;
+            });
+            ticking = true;
         }
-    });
+    }, { passive: true });
 
-    // Intersection Observer for Scroll Animations
+    // Intersection Observer for Scroll Animations - optimized
     const observerOptions = {
         root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.05
     };
 
     const observer = new IntersectionObserver((entries, observer) => {

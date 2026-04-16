@@ -7,6 +7,9 @@
     <title>About Us - ASCEND | Luxury Fitness Matale</title>
     <meta name="description"
         content="Discover the story behind ASCEND — Matale's premier luxury fitness facility. Meet our expert trainers and learn about our core values.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap"
@@ -22,49 +25,40 @@
         }
     </script>
     <style>
+        * { -webkit-tap-highlight-color: transparent; }
+        html { -webkit-text-size-adjust: 100%; }
+
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease-out;
+            transform: translateY(40px) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.active { opacity: 1; transform: translateY(0) translateZ(0); will-change: auto; }
 
         .reveal-left {
             opacity: 0;
-            transform: translateX(-60px);
-            transition: all 1s ease-out;
+            transform: translateX(-40px) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
-
-        .reveal-left.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .reveal-left.active { opacity: 1; transform: translateX(0) translateZ(0); will-change: auto; }
 
         .reveal-right {
             opacity: 0;
-            transform: translateX(60px);
-            transition: all 1s ease-out;
+            transform: translateX(40px) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
-
-        .reveal-right.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .reveal-right.active { opacity: 1; transform: translateX(0) translateZ(0); will-change: auto; }
 
         .reveal-scale {
             opacity: 0;
-            transform: scale(0.85);
-            transition: all 1s ease-out;
+            transform: scale(0.9) translateZ(0);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
-
-        .reveal-scale.active {
-            opacity: 1;
-            transform: scale(1);
-        }
+        .reveal-scale.active { opacity: 1; transform: scale(1) translateZ(0); will-change: auto; }
 
         @keyframes pulse-glow {
 
@@ -421,7 +415,7 @@
                         </div>
                         <div class="absolute -top-8 -left-8 w-20 h-20 bg-brand-silver/10 rounded-full blur-[40px]">
                         </div>
-                        <img src="assets/IMG_2500.jfif" alt="Interior"
+                        <img src="assets/IMG_2500.jfif" alt="Interior" loading="lazy" decoding="async"
                             class="rounded-xl shadow-2xl filter grayscale hover:grayscale-0 transition-all duration-700 w-full object-cover h-[600px]">
                         <div
                             class="absolute -bottom-4 -right-4 w-28 h-28 border-b-2 border-r-2 border-brand-silver/40 rounded-br-xl">
@@ -532,7 +526,7 @@
                 <!-- Founder 1: Priyan -->
                 <div class="trainer-card group relative overflow-hidden rounded-2xl reveal">
                     <div class="relative">
-                        <img src="assets/founder1 - Copy.jpeg"
+                        <img src="assets/founder1 - Copy.jpeg" loading="lazy" decoding="async"
                             class="w-full h-[520px] object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
                         <!-- Badge -->
@@ -561,7 +555,7 @@
                 <!-- Founder 2: Anjula -->
                 <div class="trainer-card group relative overflow-hidden rounded-2xl reveal" style="transition-delay:200ms">
                     <div class="relative">
-                        <img src="assets/founder2.jpeg"
+                        <img src="assets/founder2.jpeg" loading="lazy" decoding="async"
                             class="w-full h-[520px] object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                         <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
                         <!-- Badge -->
